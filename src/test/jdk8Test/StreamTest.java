@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
@@ -168,5 +169,65 @@ public class StreamTest {
         for (String s :asList){
             System.out.println(s);
         }
+        /**
+         * Collectors
+         */
+        /**
+         * count，元素的个数
+         */
+        Stream<Integer> numStream = Stream.of(1,2);
+        //System.out.println(numStream.collect(Collectors.counting()));
+
+        /**
+         * averagingDouble
+         * 平均数 double表示
+         */
+        //System.out.println(numStream.collect(Collectors.averagingDouble(x->Double.valueOf(x))));
+
+        /**
+         * averagingInt
+         * 平均数 int表示
+         */
+        //System.out.println(numStream.collect(Collectors.averagingInt(x->x)));
+
+        /**
+         * averagingLong
+         * 平均数 long表示
+         */
+        //System.out.println(numStream.collect(Collectors.averagingLong(x->x)));
+
+        /**
+         * summingInt
+         * 和 int表示 直观的理解是有几个元素，summingInt里面指定的值加几次
+         */
+        //System.out.println(numStream.collect(Collectors.summingInt(p->1)));
+
+        /**
+         * summingDouble
+         * 和 Double表示 直观的理解是有几个元素，summingDouble里面指定的值加几次
+         */
+        //System.out.println(numStream.collect(Collectors.summingDouble(p->2)));
+
+        /**
+         * summingLong
+         * 和 Long表示 直观的理解是有几个元素，summingLong里面指定的值加几次
+         */
+        System.out.println(numStream.collect(Collectors.summingLong(p->1)));
+
+        /**
+         * groupingBy
+         * 分组
+         */
+        //System.out.println(strList.stream().collect(Collectors.groupingBy(x->x.length())));
+
+        /**
+         * groupingBy
+         * 分组
+         */
+        System.out.println(strList.stream().collect(Collectors.groupingBy(x->x.length(),
+                Collectors.summingInt(p->1))));
+
+
+        //Collectors collectors = Collectors.toList();
     }
 }
