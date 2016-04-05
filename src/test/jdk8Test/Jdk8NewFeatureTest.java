@@ -102,13 +102,44 @@ public class Jdk8NewFeatureTest {
         printMap(replaceAllMap);
 
         /**
-        *
+        * putIfAbsent
         */
 
         Map<String,String> wMap = new HashMap<>();
-        wMap.
+        wMap.put("1","1");
+        System.out.println(wMap.get("1"));
+        wMap.putIfAbsent("1","2");
+        System.out.println(wMap.get("1"));
+
+
+        /**
+         * forEach
+         */
+        System.out.println("=====================forEach==============================");
+        Map<String,String> forMap = new HashMap<>();
+
+        initMap(forMap);
+
+        forMap.forEach((k,v)-> {
+            System.out.print("k="+k+" ");
+            System.out.println("v="+v);
+        });
+
+        /**
+         * merge
+         */
+        System.out.println("=====================merge==============================");
+        initMap(forMap);
+
+        forMap.merge("2","dfd",(x, y)->x.concat(y));
+        printMap(forMap);
 
     }
+
+    /**
+     * 遍历map
+     * @param map
+     */
     public static void printMap(Map map){
         Iterator<Map.Entry<Object, Object>> entries = map.entrySet().iterator();
 
@@ -116,5 +147,18 @@ public class Jdk8NewFeatureTest {
             Map.Entry<Object, Object> entry = entries.next();
             System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
         }
+    }
+
+    /**
+     * 初始化map
+     * @param map
+     */
+    public static void initMap(Map map){
+        map.clear();
+        map.put("1","1");
+        map.put("2","2");
+        map.put("3","3");
+        map.put("4","4");
+        map.put("5","5");
     }
 }
