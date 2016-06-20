@@ -1,10 +1,9 @@
 package jdk8Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
@@ -212,7 +211,7 @@ public class StreamTest {
          * summingLong
          * 和 Long表示 直观的理解是有几个元素，summingLong里面指定的值加几次
          */
-        System.out.println(numStream.collect(Collectors.summingLong(p->1)));
+        //System.out.println(numStream.collect(Collectors.summingLong(p->1)));
 
         /**
          * groupingBy
@@ -224,10 +223,93 @@ public class StreamTest {
          * groupingBy
          * 分组
          */
-        System.out.println(strList.stream().collect(Collectors.groupingBy(x->x.length(),
-                Collectors.summingInt(p->1))));
+        //System.out.println(strList.stream().collect(Collectors.groupingBy(x->x.length(), Collectors.summingInt(p->1))));
 
+        /**
+         * groupingBy
+         * 分组
+         */
+//        System.out.println(strList.stream().collect(Collectors.groupingBy(x->x.length(), HashMap::new,
+//                Collectors.summingInt(p->1))));
 
         //Collectors collectors = Collectors.toList();
+
+        //System.out.println(strList.stream().collect(Collectors.groupingBy(x->x.length(), Collectors.counting())));
+        /**
+         * Collectors.mapping 把字符串的stream匹配给对应字符串的长度的list
+         */
+        //System.out.println(strList.stream().collect(Collectors.mapping(x->x.length(),Collectors.toList())));
+
+        /**
+         * 概要统计 以double的格式显示
+         */
+        //System.out.println(strList.stream().collect(Collectors.summarizingDouble(x->x.length())));
+
+        /**
+         * 概要统计 以int的格式显示
+         */
+        //System.out.println(strList.stream().collect(Collectors.summarizingInt(x->x.length())));
+
+        /**
+         * 概要统计 以long的格式显示
+         */
+        //System.out.println(strList.stream().collect(Collectors.summarizingLong(x->x.length())));
+
+        /**
+         * 求和 以long的格式显示
+         */
+        //System.out.println(strList.stream().collect(Collectors.summingDouble(x->x.length())));
+
+        /**
+         * collectingAndThen
+         */
+        System.out.println("==============================collectingAndThen================================");
+        System.out.printf(strList.stream().collect(Collectors.collectingAndThen(Collectors.averagingInt(x->x.length()),a->a.toString())));
+
+        /**
+         * Collectors.maxBy(
+         */
+        System.out.println(strList.stream().collect(Collectors.maxBy((x,y)->x.compareTo(y))));
+
+        /**
+         * Collectors.maxBy(
+         */
+        System.out.println(strList.stream().collect(Collectors.minBy((x,y)->x.compareTo(y))));
+
+        /**
+         * Collectors.minBy(
+         */
+        System.out.println(strList.stream().collect(Collectors.minBy((x,y)->x.compareTo(y))));
+
+        /**
+         * Collectors.partitioningBy
+         */
+        System.out.println(strList.stream().collect(Collectors.partitioningBy(x->x.length()>5)));
+
+        /**
+         * Collectors.partitioningBy
+         */
+        System.out.println(strList.stream().collect(Collectors.partitioningBy(x->x.length()>5, Collectors.counting())));
+
+        /**
+         * Collectors.joining()
+         */
+        System.out.println(strList.stream().collect(Collectors.joining()));
+
+        /**
+         * Collectors.joining()
+         */
+        System.out.println(strList.stream().collect(Collectors.joining("#")));
+
+        /**
+         * Collectors.joining()
+         */
+        System.out.println(strList.stream().collect(Collectors.joining("#","[","]")));
+
+
+        /**
+         * Collectors.joining()
+         */
+        System.out.println(strList.stream().collect(Collectors.joining("#","[","]")));
     }
 }
